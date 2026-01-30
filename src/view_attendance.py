@@ -6,7 +6,7 @@ from datetime import datetime
 from config import ATTENDANCE_DIR, TEAM_CSV
 
 
-# ✅ Get file path by date
+# Get file path by date
 def attendance_file_by_date(date_str: str):
     """
     date_str format: YYYY-MM-DD
@@ -18,7 +18,7 @@ def attendance_file_by_date(date_str: str):
     return None
 
 
-# ✅ Get latest attendance file
+# Get latest attendance file
 def latest_attendance_file():
     if not os.path.exists(ATTENDANCE_DIR):
         return None
@@ -31,7 +31,7 @@ def latest_attendance_file():
     return os.path.join(ATTENDANCE_DIR, files[0])
 
 
-# ✅ Load manager team members
+# Load manager team members
 def load_team_members(manager_name: str):
     if not os.path.exists(TEAM_CSV):
         return []
@@ -46,7 +46,7 @@ def load_team_members(manager_name: str):
     return team
 
 
-# ✅ Read multiple attendance files (range)
+# Read multiple attendance files (range)
 def read_attendance_range(from_date: str, to_date: str):
     """
     Read files from from_date to to_date.
@@ -88,14 +88,14 @@ def main():
     # For team mode
     parser.add_argument("--manager", default="")
 
-    # ✅ New options
+    # New options
     parser.add_argument("--date", default="", help="YYYY-MM-DD (view specific date attendance file)")
     parser.add_argument("--from_date", default="", help="YYYY-MM-DD (start date)")
     parser.add_argument("--to_date", default="", help="YYYY-MM-DD (end date)")
 
     args = parser.parse_args()
 
-    # ✅ Decide which file to use
+    # Decide which file to use
     df = None
     used_files = []
 
@@ -103,7 +103,7 @@ def main():
         if args.date:
             file_path = attendance_file_by_date(args.date)
             if not file_path:
-                print(f"❌ No attendance file found for date: {args.date}")
+                print(f" No attendance file found for date: {args.date}")
                 return
 
             df = pd.read_csv(file_path)
@@ -112,7 +112,7 @@ def main():
         elif args.from_date and args.to_date:
             df = read_attendance_range(args.from_date, args.to_date)
             if df is None:
-                print(f"❌ No attendance files found between {args.from_date} to {args.to_date}")
+                print(f" No attendance files found between {args.from_date} to {args.to_date}")
                 return
 
             used_files.append(f"{args.from_date} to {args.to_date}")
@@ -121,46 +121,46 @@ def main():
             # default latest
             file_path = latest_attendance_file()
             if not file_path:
-                print("❌ No attendance file found.")
+                print(" No attendance file found.")
                 return
 
             df = pd.read_csv(file_path)
             used_files.append(file_path)
 
     except Exception as e:
-        print(f"❌ Error: {e}")
+        print(f" Error: {e}")
         return
 
-    # ✅ Apply mode filtering
+    # Apply mode filtering
     if args.mode == "all":
-        print("\n✅ Showing ALL Attendance\n")
+        print("\nShowing ALL Attendance\n")
         print(df)
 
     elif args.mode == "self":
         if not args.name:
-            print("❌ Please provide --name for self mode")
+            print(" Please provide --name for self mode")
             return
 
         df_self = df[df["Name"].astype(str).str.lower() == args.name.lower()]
-        print(f"\n✅ Showing Attendance for: {args.name}\n")
+        print(f"\nShowing Attendance for: {args.name}\n")
         print(df_self)
 
     elif args.mode == "team":
         if not args.manager:
-            print("❌ Please provide --manager for team mode")
+            print(" Please provide --manager for team mode")
             return
 
         team = load_team_members(args.manager)
         if not team:
-            print("⚠️ No team found for this manager. Add manager_teams.csv")
+            print("No team found for this manager. Add manager_teams.csv")
             return
 
         df_team = df[df["Name"].astype(str).isin(team)]
-        print(f"\n✅ Showing TEAM Attendance for Manager: {args.manager}\n")
+        print(f"\nShowing TEAM Attendance for Manager: {args.manager}\n")
         print(df_team)
 
-    # ✅ Show used file info
-    print("\n📂 Files used:")
+    # Show used file info
+    print("\nFiles used:")
     for f in used_files:
         print(" -", f)
 

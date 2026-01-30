@@ -32,43 +32,43 @@ def register_face(person_name: str, max_images: int = 30):
     dataset/PersonName/1.jpg ...
     """
 
-    # ✅ Check xml files
+    # Check xml files
     for xml_path in [FRONTAL_DEFAULT_XML, FRONTAL_ALT2_XML, PROFILE_XML]:
         if not os.path.exists(xml_path):
-            print("❌ Cascade not found:", xml_path)
-            print("✅ Put xml files inside models folder")
+            print(" Cascade not found:", xml_path)
+            print("Put xml files inside models folder")
             return
 
-    # ✅ Load cascades
+    # Load cascades
     cascade1 = cv2.CascadeClassifier(FRONTAL_DEFAULT_XML)
     cascade2 = cv2.CascadeClassifier(FRONTAL_ALT2_XML)
     cascade3 = cv2.CascadeClassifier(PROFILE_XML)
 
-    # ✅ Create person folder
+    # Create person folder
     person_dir = os.path.join(DATASET_DIR, person_name)
     os.makedirs(person_dir, exist_ok=True)
 
-    # ✅ Start camera
+    # Start camera
     cap = cv2.VideoCapture(0)
     if not cap.isOpened():
-        print("❌ Camera not opening")
+        print(" Camera not opening")
         return
 
-    print(f"✅ Registration started for: {person_name}")
-    print(f"📂 Saving images to: {person_dir}")
-    print("👉 Press 'q' to stop early")
+    print(f"Registration started for: {person_name}")
+    print(f" Saving images to: {person_dir}")
+    print("Press 'q' to stop early")
 
     count = 0
 
     while True:
         ret, frame = cap.read()
         if not ret:
-            print("❌ Camera frame not received")
+            print(" Camera frame not received")
             break
 
         gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
-        # ✅ Detect using 3 cascades
+        # Detect using 3 cascades
         faces = detect_faces_3cascades(gray, cascade1, cascade2, cascade3)
 
         for (x, y, w, h) in faces:
@@ -83,7 +83,7 @@ def register_face(person_name: str, max_images: int = 30):
             img_path = os.path.join(person_dir, f"{count}.jpg")
             cv2.imwrite(img_path, face_roi)
 
-            print(f"✅ Saved {count}/{max_images}: {img_path}")
+            print(f"Saved {count}/{max_images}: {img_path}")
 
             # slow save speed
             cv2.waitKey(200)
@@ -101,11 +101,11 @@ def register_face(person_name: str, max_images: int = 30):
         cv2.imshow("Register Face - Smart Attendance", frame)
 
         if cv2.waitKey(1) & 0xFF == ord("q"):
-            print("⚠️ Registration stopped by user.")
+            print(" Registration stopped by user.")
             break
 
         if count >= max_images:
-            print("✅ Registration completed successfully 🎉")
+            print("Registration completed successfully 🎉")
             break
 
     cap.release()
@@ -117,7 +117,7 @@ def main():
 
     person_name = input("Enter Employee Name: ").strip()
     if not person_name:
-        print("❌ Name cannot be empty!")
+        print(" Name cannot be empty!")
         return
 
     register_face(person_name, max_images=30)

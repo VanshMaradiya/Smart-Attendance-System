@@ -50,14 +50,14 @@ class RoleDashboard:
 
         btn_style = {"font": ("Arial", 12), "width": 28, "height": 2}
 
-        # ✅ ADMIN DASHBOARD
+        # ADMIN DASHBOARD
         if role == "admin":
             tk.Button(frame, text="1) Register Face", command=lambda: run_script("register_face.py"), **btn_style).pack(pady=8)
             tk.Button(frame, text="2) Train Model", command=lambda: run_script("train_model.py"), **btn_style).pack(pady=8)
             tk.Button(frame, text="3) Mark Attendance", command=lambda: run_script("mark_attendance.py"), **btn_style).pack(pady=8)
             tk.Button(frame, text="4) Attendance Report", command=lambda: run_script("attendance_report_gui.py"), **btn_style).pack(pady=8)
 
-        # ✅ MANAGER DASHBOARD
+        # MANAGER DASHBOARD
         elif role == "manager":
             tk.Button(
                 frame,
@@ -68,7 +68,7 @@ class RoleDashboard:
 
             tk.Label(frame, text="(Team filter can be added next)", font=("Arial", 10)).pack(pady=2)
 
-        # ✅ EMPLOYEE DASHBOARD
+        # EMPLOYEE DASHBOARD
         elif role == "employee":
             tk.Button(
                 frame,

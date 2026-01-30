@@ -43,7 +43,7 @@ def authenticate(username: str, password: str, role: str):
     """
     file_path = _get_file_by_role(role)
     if not file_path:
-        print("❌ Invalid role selected!")
+        print(" Invalid role selected!")
         return None
 
     _ensure_file(file_path)
@@ -56,7 +56,7 @@ def authenticate(username: str, password: str, role: str):
 
     # safe check
     if not {"username", "password", "name"}.issubset(set(df.columns)):
-        print("❌ CSV columns missing!")
+        print(" CSV columns missing!")
         return None
 
     # clean csv values
@@ -91,7 +91,7 @@ def register_user(username: str, password: str, role: str, name: str):
     """
     file_path = _get_file_by_role(role)
     if not file_path:
-        return False, "❌ Invalid role selected!"
+        return False, " Invalid role selected!"
 
     _ensure_file(file_path)
 
@@ -107,14 +107,14 @@ def register_user(username: str, password: str, role: str, name: str):
 
     # validation
     if username == "" or password == "" or name == "":
-        return False, "❌ All fields required!"
+        return False, " All fields required!"
 
     # username check
     if not df.empty:
         df["username"] = df["username"].astype(str).str.strip()
 
         if username in df["username"].values:
-            return False, f"❌ Username already exists in {role}!"
+            return False, f" Username already exists in {role}!"
 
     # add new row
     new_row = {"username": username, "password": password, "name": name}

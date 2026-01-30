@@ -1,5 +1,6 @@
 from auth import register_user
 
+
 def main():
     username = "Vansh"
     password = "admin123"
@@ -10,11 +11,11 @@ def main():
     print(msg)
 
     if ok:
-        print(f"✅ Admin created successfully!")
-        print(f"👉 Username: {username}")
-        print(f"👉 Password: {password}")
+        print(f" Admin created successfully!")
+        print(f" Username: {username}")
+        print(f" Password: {password}")
     else:
-        print("⚠️ Admin already exists or error occurred.")
+        print(" Admin already exists or error occurred.")
 
 
 if __name__ == "__main__":

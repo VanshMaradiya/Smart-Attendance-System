@@ -7,7 +7,7 @@ from datetime import datetime
 from config import ATTENDANCE_DIR, REPORTS_DIR
 
 
-# ✅ Helper: get file path by date
+# Helper: get file path by date
 def attendance_file_by_date(date_str: str):
     file_path = os.path.join(ATTENDANCE_DIR, f"{date_str}.csv")
     if os.path.exists(file_path):
@@ -15,7 +15,7 @@ def attendance_file_by_date(date_str: str):
     return None
 
 
-# ✅ Helper: get latest file
+# Helper: get latest file
 def latest_attendance_file():
     if not os.path.exists(ATTENDANCE_DIR):
         return None
@@ -28,7 +28,7 @@ def latest_attendance_file():
     return os.path.join(ATTENDANCE_DIR, files[0])
 
 
-# ✅ Read attendance range
+# Read attendance range
 def read_attendance_range(from_date: str, to_date: str):
     start = datetime.strptime(from_date, "%Y-%m-%d")
     end = datetime.strptime(to_date, "%Y-%m-%d")
@@ -54,7 +54,7 @@ def read_attendance_range(from_date: str, to_date: str):
     return pd.concat(all_data, ignore_index=True)
 
 
-# ✅ PDF Export (ReportLab)
+# PDF Export (ReportLab)
 def export_pdf(df: pd.DataFrame, file_path: str):
     try:
         from reportlab.lib.pagesizes import A4
@@ -103,7 +103,7 @@ class AttendanceReportGUI:
 
         self.df = None
 
-        # ✅ Filters Frame
+        # Filters Frame
         filter_frame = tk.Frame(root)
         filter_frame.pack(fill="x", padx=10, pady=10)
 
@@ -133,7 +133,7 @@ class AttendanceReportGUI:
         tk.Button(filter_frame, text="Load Report",
                   command=self.load_report).grid(row=0, column=8, padx=10)
 
-        # ✅ Buttons
+        # Buttons
         btn_frame = tk.Frame(root)
         btn_frame.pack(fill="x", padx=10, pady=5)
 
@@ -142,7 +142,7 @@ class AttendanceReportGUI:
         tk.Button(btn_frame, text="Export PDF",
                   command=self.export_pdf_report).pack(side="left", padx=5)
 
-        # ✅ Table Frame
+        # Table Frame
         table_frame = tk.Frame(root)
         table_frame.pack(fill="both", expand=True, padx=10, pady=10)
 
