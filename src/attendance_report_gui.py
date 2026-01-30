@@ -196,7 +196,7 @@ class AttendanceReportGUI:
                 self.df = df
 
             self.show_table()
-            messagebox.showinfo("Success", "Report loaded successfully ✅")
+            messagebox.showinfo("Success", "Report loaded successfully ")
 
         except Exception as e:
             messagebox.showerror("Error", str(e))
@@ -238,7 +238,7 @@ class AttendanceReportGUI:
             return
 
         self.df.to_excel(file_path, index=False)
-        messagebox.showinfo("Success", f"Excel exported ✅\n{file_path}")
+        messagebox.showinfo("Success", f"Excel exported \n{file_path}")
 
     def export_pdf_report(self):
         if self.df is None or self.df.empty:
@@ -258,7 +258,7 @@ class AttendanceReportGUI:
 
         try:
             export_pdf(self.df, file_path)
-            messagebox.showinfo("Success", f"PDF exported ✅\n{file_path}")
+            messagebox.showinfo("Success", f"PDF exported \n{file_path}")
         except Exception as e:
             messagebox.showerror("Error", str(e))
 

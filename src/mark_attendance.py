@@ -55,7 +55,7 @@ def mark_attendance(name: str):
     file_path = get_today_file_path()
 
     if is_already_marked(file_path, name):
-        print(f"⚠️ Attendance already marked for {name} today ")
+        print(f"Attendance already marked for {name} today ")
         return
 
     now = datetime.now()
@@ -75,7 +75,7 @@ def mark_attendance(name: str):
         df.to_csv(file_path, index=False)
 
     print(f" Attendance marked: {name} | {time_str} | {status}")
-    print(f"📂 Saved in: {file_path}")
+    print(f"Saved in: {file_path}")
 
 
 def save_unknown_face(frame):
@@ -83,7 +83,7 @@ def save_unknown_face(frame):
     file_name = f"unknown_{ts}.jpg"
     save_path = os.path.join(UNKNOWN_DIR, file_name)
     cv2.imwrite(save_path, frame)
-    print(f"🚨 Unknown person saved: {save_path}")
+    print(f"Unknown person saved: {save_path}")
 
 
 def main():
