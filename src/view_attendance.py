@@ -46,7 +46,7 @@ def load_team_members(manager_name: str):
     return team
 
 
-# Read multiple attendance files (range)
+# Read multiple attendance files
 def read_attendance_range(from_date: str, to_date: str):
     """
     Read files from from_date to to_date.
@@ -67,7 +67,7 @@ def read_attendance_range(from_date: str, to_date: str):
 
         if file_path:
             df = pd.read_csv(file_path)
-            df["File"] = os.path.basename(file_path)  # optional
+            df["File"] = os.path.basename(file_path) 
             all_data.append(df)
 
         current = current + pd.Timedelta(days=1)
