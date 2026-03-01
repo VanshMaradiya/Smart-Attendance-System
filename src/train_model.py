@@ -5,12 +5,6 @@ from datetime import datetime
 
 from config import DATASET_DIR, TRAINER_DIR, FACE_SIZE
 
-#  Read all dataset images and create:
-# faces   -> list of face images (gray resized)
-# labels  -> list of label ids (0,1,2...)
-# id_name_map -> id to person name mapping
-
-
 def get_images_and_labels():
     """
     Expected dataset structure:
@@ -85,13 +79,6 @@ def get_images_and_labels():
     print(f" Total skipped images: {total_skipped}")
     return faces, labels, id_name_map
 
-
-#  Save labels file
-# format:
-# 0,Vansh
-# 1,Rahul
-
-
 def save_labels_file(id_name_map: dict):
     os.makedirs(TRAINER_DIR, exist_ok=True)
 
@@ -101,9 +88,6 @@ def save_labels_file(id_name_map: dict):
             f.write(f"{pid},{name}\n")
 
     print(f" labels.txt saved at: {labels_path}")
-
-
-#  Main training function
 
 
 def main():
@@ -117,7 +101,7 @@ def main():
         print(f"\nERROR: {e}")
         return
 
-    #  minimum images check (for accuracy)
+    #  minimum images check
     if len(faces) < 10:
         print("\nNot enough images to train model properly.")
         print(" Please register at least 10-20 images per person.")
