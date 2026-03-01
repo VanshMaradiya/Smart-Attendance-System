@@ -61,10 +61,10 @@ class LoginGUI:
         user_info = authenticate(username, password, role)
 
         if not user_info:
-            messagebox.showerror("Login Failed", "Invalid username/password/role ❌")
+            messagebox.showerror("Login Failed", "Invalid username/password/role")
             return
 
-        messagebox.showinfo("Success", f"Welcome {user_info['name']} ✅")
+        messagebox.showinfo("Success", f"Welcome {user_info['name']}")
 
         # open dashboard
         self.root.destroy()
@@ -133,7 +133,6 @@ class RegisterWindow:
 
         if ok:
             messagebox.showinfo("Success", msg)
-            # ✅ redirect to login (close register window)
             self.window.destroy()
         else:
             messagebox.showerror("Error", msg)
