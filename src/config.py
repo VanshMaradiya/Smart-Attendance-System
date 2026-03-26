@@ -16,8 +16,8 @@ DATA_DIR = os.path.join(BASE_DIR, "data")
 
 
 EMP_CSV = os.path.join(DATA_DIR, "employees.csv")
-USERS_CSV = os.path.join(DATA_DIR, "users.csv")
-TEAM_CSV = os.path.join(DATA_DIR, "manager_teams.csv")
+USERS_CSV = os.path.join(DATA_DIR, "admins.csv")
+TEAM_CSV = os.path.join(DATA_DIR, "managers.csv")
 
 
 FRONTAL_DEFAULT_XML = os.path.join(MODELS_DIR, "haarcascade_frontalface_default.xml")
